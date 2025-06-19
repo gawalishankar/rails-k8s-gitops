@@ -9,4 +9,4 @@ spec:
     - name: repo-url
       value: https://github.com/gawalishankar/rails-k8s-gitops.git
     - name: image-url
-      value: docker.io/shivdevops/myapp:latest
+      value: docker.io/shiv201/myapp:latest
