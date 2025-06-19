@@ -14,7 +14,7 @@ spec:
       script: |
         git clone $(https://github.com/gawalishankar/rails-k8s-gitops.git) $(workspaces.source.path)
 
-    - name: build-and-push
+    - name: build-push
       image: gcr.io/kaniko-project/executor:latest
       args:
         - "--dockerfile=$(workspaces.source.path)/Dockerfile"
