@@ -1,0 +1,12 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: build-pipeline-run
+spec:
+  pipelineRef:
+    name: build-pipeline
+  params:
+    - name: repo-url
+      value: https://github.com/gawalishankar/rails-k8s-gitops.git
+    - name: image-url
+      value: docker.io/shivdevops/myapp:latest
