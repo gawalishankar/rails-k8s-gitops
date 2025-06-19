@@ -1,4 +1,4 @@
-apiVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1
 kind: Task
 metadata:
   name: build-and-push
@@ -6,25 +6,17 @@ spec:
   params:
     - name: repo-url
     - name: image-url
+  workspaces:
+    - name: source
   steps:
-    - name: git-clone
+    - name: clone
       image: alpine/git
       script: |
-        git clone $(params.repo-url) /workspace/app
+        git clone $(https://github.com/gawalishankar/rails-app.git) $(workspaces.source.path)
 
-    - name: kaniko-build
+    - name: build-and-push
       image: gcr.io/kaniko-project/executor:latest
-      env:
-        - name: DOCKER_CONFIG
-          value: /tekton/home/.docker/
-      volumeMounts:
-        - name: docker-config
-          mountPath: /tekton/home/.docker/
       args:
-        - "--dockerfile=/workspace/app/Dockerfile"
-        - "--context=/workspace/app"
-        - "--destination=$(params.image-url)"
-  volumes:
-    - name: docker-config
-      secret:
-        secretName: dockerhub-secret
+        - "--dockerfile=$(workspaces.source.path)/Dockerfile"
+        - "--context=$(workspaces.source.path)"
+        - "--destination=$(docker.io/shiv201/myapp:latest)"
