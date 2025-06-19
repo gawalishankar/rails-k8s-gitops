@@ -15,20 +15,16 @@ spec:
     - name: kaniko-build
       image: gcr.io/kaniko-project/executor:latest
       env:
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /tekton/creds/.dockerconfigjson
+        - name: DOCKER_CONFIG
+          value: /tekton/home/.docker/
       volumeMounts:
         - name: docker-config
-          mountPath: /tekton/creds
+          mountPath: /tekton/home/.docker/
       args:
         - "--dockerfile=/workspace/app/Dockerfile"
         - "--context=/workspace/app"
         - "--destination=$(params.image-url)"
-        - "--verbosity=debug"
   volumes:
     - name: docker-config
       secret:
-        secretName: regcred
-        items:
-          - key: .dockerconfigjson
-            path: .dockerconfigjson
+        secretName: dockerhub-secret
