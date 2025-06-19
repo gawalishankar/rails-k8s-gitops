@@ -12,7 +12,7 @@ spec:
     - name: clone
       image: alpine/git
       script: |
-        git clone $(https://github.com/gawalishankar/rails-app.git) $(workspaces.source.path)
+        git clone $(https://github.com/gawalishankar/rails-k8s-gitops.git) $(workspaces.source.path)
 
     - name: build-and-push
       image: gcr.io/kaniko-project/executor:latest
