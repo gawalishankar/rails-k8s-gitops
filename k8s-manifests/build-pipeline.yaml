@@ -14,4 +14,4 @@ spec:
         - name: repo-url
           value: $(https://github.com/gawalishankar/rails-app.git)
         - name: image-url
-          value: $(docker.io/shivdevops/myapp:latest)
+          value: $(docker.io/shiv201/myapp:latest)
