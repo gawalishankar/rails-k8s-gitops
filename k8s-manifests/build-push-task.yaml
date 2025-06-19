@@ -19,4 +19,4 @@ spec:
       args:
         - "--dockerfile=$(workspaces.source.path)/Dockerfile"
         - "--context=$(workspaces.source.path)"
-        - "--destination=$(docker.io/shivdevops/myapp:latest)"
+        - "--destination=$(docker.io/shiv201/myapp:latest)"
