@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: rails
-          image: <your-dockerhub-username>/myapp:latest
+          image: docker.io/shiv201/myapp:latest
           ports:
             - containerPort: 3000
           env:
