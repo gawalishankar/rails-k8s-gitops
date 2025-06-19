@@ -4,7 +4,7 @@ metadata:
   name: rails-ci-pipeline-run
 spec:
   pipelineRef:
-    name: rails-ci-pipeline
+    name: build-pipeline
   params:
     - name: repo-url
       value: https://github.com/gawalishankar/rails-app.git
