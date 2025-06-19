@@ -6,8 +6,7 @@ spec:
   params:
     - name: repo-url
     - name: image-url
-  workspaces:
-    - name: shared-data
+
   tasks:
     - name: build
       taskRef:
@@ -17,6 +16,3 @@ spec:
           value:  https://github.com/gawalishankar/rails-app.git
         - name: image-url
           value: docker.io/shiv201/myapp:latest
-          workspaces:
-        - name: source
-          workspace: shared-data
