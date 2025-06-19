@@ -12,6 +12,6 @@ spec:
         name: build-push
       params:
         - name: repo-url
-          value: $(params.repo-url)
+          value: $(https://github.com/gawalishankar/rails-app.git)
         - name: image-url
-          value: $(params.image-url)
+          value: $(docker.io/shiv201/myapp:latest)
