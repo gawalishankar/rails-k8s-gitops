@@ -7,7 +7,7 @@ spec:
     name: rails-ci-pipeline
   params:
     - name: repo-url
-      value:  https://github.com/gawalishankar/rails-k8s-gitops.git
+      value: https://github.com/gawalishankar/rails-app.git
     - name: image-url
       value: docker.io/shiv201/myapp:latest
   workspaces:
