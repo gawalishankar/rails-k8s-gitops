@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: rails-ci-pipeline
+  name: build-pipeline
 spec:
   params:
     - name: repo-url
