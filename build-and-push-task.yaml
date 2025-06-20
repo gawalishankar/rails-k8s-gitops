@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1
 kind: Task
 metadata:
-  name: build-push
+  name: build-and-push
 spec:
   params:
     - name: repo-url
@@ -13,7 +13,7 @@ spec:
   workspaces:
     - name: source
   steps:
-    - name: clone
+    - name: git-clone
       image: alpine/git
       script: |
         git clone $(params.repo-url) $(workspaces.source.path)
