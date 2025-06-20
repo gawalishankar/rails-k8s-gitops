@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: rails-ci-run
+spec:
+  pipelineRef:
+    name: rails-ci-pipeline
+  params:
+    - name: repo-url
+      value:  https://github.com/gawalishankar/rails-app.git
+    - name: image-url
+      value: docker.io/shiv201/myapp:latest
+  workspaces:
+    - name: source
+      volumeClaimTemplate:
+        metadata:
+          name: pipeline-workspace
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 1Gi
