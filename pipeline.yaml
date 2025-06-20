@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: build-pipeline
+  name: rails-ci-pipeline
 spec:
   params:
     - name: repo-url
@@ -13,9 +13,9 @@ spec:
   workspaces:
     - name: source
   tasks:
-    - name: build
+    - name: build-push
       taskRef:
-        name: build-push
+        name: build-and-push
       params:
         - name: repo-url
           value: $(params.repo-url)
