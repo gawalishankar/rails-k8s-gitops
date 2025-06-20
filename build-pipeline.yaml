@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: build-pipeline
+spec:
+  params:
+    - name: repo-url
+      type: string
+      default: https://github.com/gawalishankar/rails-k8s-gitops.git
+    - name: image-url
+      type: string
+      default: docker.io/shiv201/myapp:latest
+  workspaces:
+    - name: source
+  tasks:
+    - name: build
+      taskRef:
+        name: build-push
+      params:
+        - name: repo-url
+          value: $(params.repo-url)
+        - name: image-url
+          value: $(params.image-url)
+      workspaces:
+        - name: source
+          workspace: source
