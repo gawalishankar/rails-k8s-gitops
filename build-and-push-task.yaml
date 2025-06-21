@@ -1,25 +1,30 @@
 apiVersion: tekton.dev/v1
 kind: Task
 metadata:
-  name: build-and-push
+  name: build-push
 spec:
   params:
     - name: repo-url
-      type: string
-      default: https://github.com/gawalishankar/rails-k8s-gitops.git
     - name: image-url
-      type: string
-      default: docker.io/shiv201/myapp:latest
   workspaces:
     - name: source
+    - name: dockerconfig  # 👈 Workspace for Docker credentials
   steps:
-    - name: git-clone
+    - name: clone
       image: alpine/git
       script: |
-        git clone $(https://github.com/gawalishankar/rails-k8s-gitops.git) $(workspaces.source.path)
+        git clone $(params.repo-url) $(workspaces.source.path)
+
     - name: build-push
       image: gcr.io/kaniko-project/executor:latest
       args:
         - "--dockerfile=$(workspaces.source.path)/Dockerfile"
         - "--context=$(workspaces.source.path)"
         - "--destination=$(params.image-url)"
+        - "--verbosity=debug"
+      env:
+        - name: DOCKER_CONFIG
+          value: /kaniko/.docker
+      volumeMounts:
+        - name: dockerconfig
+          mountPath: /kaniko/.docker
