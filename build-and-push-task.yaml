@@ -16,7 +16,7 @@ spec:
     - name: git-clone
       image: alpine/git
       script: |
-        git clone $(params.repo-url) $(workspaces.source.path)
+        git clone $(https://github.com/gawalishankar/rails-k8s-gitops.git) $(workspaces.source.path)
     - name: build-push
       image: gcr.io/kaniko-project/executor:latest
       args:
